@@ -18,7 +18,7 @@ page.on("response", (response) => {
 });
 
 await page.goto(process.env.CALLWA_PREVIEW_URL ?? "http://127.0.0.1:4173", { waitUntil: "networkidle" });
-await page.getByRole("heading", { name: "Um céu esperando vocês" }).waitFor();
+await page.getByRole("button", { name: "Mudar para céu de noite" }).waitFor();
 await page.screenshot({ path: "/tmp/callwa-home.png" });
 await page.getByRole("button", { name: "Mudar para céu de noite" }).click();
 await page.screenshot({ path: "/tmp/callwa-night.png" });
@@ -31,7 +31,7 @@ await page.screenshot({ path: "/tmp/callwa-sheet.png" });
 await page.getByRole("button", { name: /Bom dia/ }).click();
 await page.getByRole("button", { name: /Uma faísca está viajando/ }).waitFor();
 await page.getByRole("button", { name: /Uma faísca está viajando/ }).click();
-await page.getByText("1 estrela guarda um pedaço da história de vocês.").waitFor();
+await page.locator(".natural-star").waitFor();
 await page.screenshot({ path: "/tmp/callwa-exchange.png" });
 
 if (errors.length) {

@@ -1,16 +1,15 @@
 "use client";
 
+import Image from "next/image";
 import {
   BellSimple,
   CaretRight,
-  Fire,
   GearSix,
   Heart,
   House,
   MoonStars,
   PaperPlaneTilt,
   Sparkle,
-  Star,
   Sun,
   UserCircle,
   UsersThree,
@@ -19,7 +18,7 @@ import {
 import { useEffect, useState, type CSSProperties } from "react";
 
 type QuickMessage = { label: string; detail: string; icon: "sun" | "moon" | "heart" | "spark" };
-type SkyStar = { id: string; left: number; top: number; color: "pink" | "blue" };
+type SkyStar = { id: string; left: number; top: number };
 
 const QUICK_MESSAGES: QuickMessage[] = [
   { label: "Bom dia", detail: "Um começo iluminado", icon: "sun" },
@@ -39,7 +38,7 @@ function MessageIcon({ kind }: { kind: QuickMessage["icon"] }) {
 }
 
 function randomStar(): SkyStar {
-  return { id: crypto.randomUUID(), left: 10 + Math.random() * 80, top: 27 + Math.random() * 42, color: Math.random() > 0.5 ? "pink" : "blue" };
+  return { id: crypto.randomUUID(), left: 12 + Math.random() * 76, top: 22 + Math.random() * 40 };
 }
 
 export default function HomePage() {
@@ -80,7 +79,7 @@ export default function HomePage() {
   return (
     <main
       className={isNight ? "world-screen night" : "world-screen day"}
-      style={{ "--sky-night": `url("${assetPath}/sky-night.png")`, "--sky-day": `url("${assetPath}/sky-day-clear.png")` } as CSSProperties}
+      style={{ "--sky-night": `url("${assetPath}/sky-night-moon.png")`, "--sky-day": `url("${assetPath}/sky-day-clear.png")` } as CSSProperties}
     >
       <div className="sky-background" aria-hidden="true" />
       <div className="sky-scrim" aria-hidden="true" />
@@ -99,18 +98,13 @@ export default function HomePage() {
         </button>
       </section>
 
-      <section className="world-story" aria-label="Mundo compartilhado">
-        <span className="eyebrow">ATO 1 · O CÉU</span>
-        <h1>{stars.length === 0 ? "Um céu esperando vocês" : "O céu de vocês está acordando"}</h1>
-        <p>{stars.length === 0 ? "A primeira troca completa vai deixar uma estrela aqui para sempre." : `${stars.length} ${stars.length === 1 ? "estrela guarda" : "estrelas guardam"} um pedaço da história de vocês.`}</p>
-      </section>
-
       <div className="star-field" aria-label={`${stars.length} estrelas no céu`}>
-        {stars.map((star) => <Star key={star.id} className={`sky-star ${star.color} ${newStarId === star.id ? "newborn" : ""}`} style={{ left: `${star.left}%`, top: `${star.top}%` }} size={newStarId === star.id ? 36 : 18} weight="fill" />)}
+        {stars.map((star) => (
+          <span key={star.id} className={`natural-star ${newStarId === star.id ? "newborn" : ""}`} style={{ left: `${star.left}%`, top: `${star.top}%` }}>
+            <Image src={`${assetPath}/star-light.png`} alt="" width={64} height={64} priority={newStarId === star.id} />
+          </span>
+        ))}
       </div>
-
-      <p className="sky-hint">{isNight ? stars.length === 0 ? "Quando uma estrela nascer, ela ficará neste céu." : "As estrelas só aparecem quando a noite chega." : "Toque em Noite para enxergar as estrelas que vocês criaram."}</p>
-      <button className="ritual-chip" onClick={() => setSheetOpen(true)}><Fire size={16} weight="fill" /><span>Um ritual suave para hoje</span><CaretRight size={16} /></button>
 
       {pending && <button className="pending-spark" onClick={simulateReply}><Sparkle size={24} weight="fill" /><span><strong>Uma faísca está viajando</strong><small>Leo recebeu “{pending}”</small><em>DEMONSTRAÇÃO · simular resposta</em></span><CaretRight size={18} /></button>}
 
