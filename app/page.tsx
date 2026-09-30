@@ -79,10 +79,11 @@ export default function HomePage() {
   return (
     <main
       className={isNight ? "world-screen night" : "world-screen day"}
-      style={{ "--sky-night": `url("${assetPath}/sky-night-moon.png")`, "--sky-day": `url("${assetPath}/sky-day-clear.png")` } as CSSProperties}
+      style={{ "--sky-night": `url("${assetPath}/sky-night-moon.png")`, "--sky-day": `url("${assetPath}/sky-day-clear.png")`, "--cloud-drift": `url("${assetPath}/cloud-drift.png")` } as CSSProperties}
     >
       <div className="sky-background" aria-hidden="true" />
       <div className="sky-scrim" aria-hidden="true" />
+      <div className="cloud-drift" aria-hidden="true"><i /><i /></div>
 
       <header className="topbar">
         <button className="chrome-button" aria-label="Abrir perfil" onClick={() => setToast("O perfil completo chega na próxima etapa do protótipo")}><UserCircle size={24} weight="duotone" /></button>
