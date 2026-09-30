@@ -51,3 +51,7 @@ Esta demonstração não requer variáveis secretas. Após a primeira publicaç�
 Presença, dispositivos e mensagens são simulados. MQTT, autenticação, persistência, os Atos 2–4 e assinatura Premium ainda não estão integrados. Mensagens personalizadas e reencontro têm apenas feedback de demonstração.
 
 Enviar este repositório ao GitHub disponibiliza o código; para acessar o site pela internet é necessário também publicar a aplicação em um serviço de hospedagem.
+
+## Prévia no GitHub Pages
+
+Cada push para `main` também publica uma prévia estática no GitHub Pages. Quando a primeira execução terminar, ela estará em `https://callebecruz.github.io/CallWa_Recompensa/`.
