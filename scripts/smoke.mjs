@@ -17,7 +17,7 @@ page.on("response", (response) => {
   if (response.status() >= 400) failedResources.push(`${response.status()} ${response.url()}`);
 });
 
-await page.goto("http://127.0.0.1:4173", { waitUntil: "networkidle" });
+await page.goto(process.env.CALLWA_PREVIEW_URL ?? "http://127.0.0.1:4173", { waitUntil: "networkidle" });
 await page.screenshot({ path: "/tmp/callwa-home.png" });
 const nightToggle = page.getByRole("button", { name: "Mostrar céu de noite" });
 if (await nightToggle.count()) await nightToggle.click();
