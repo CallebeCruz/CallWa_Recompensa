@@ -18,9 +18,9 @@ page.on("response", (response) => {
 });
 
 await page.goto(process.env.CALLWA_PREVIEW_URL ?? "http://127.0.0.1:4173", { waitUntil: "networkidle" });
+await page.getByRole("heading", { name: "Um céu esperando vocês" }).waitFor();
 await page.screenshot({ path: "/tmp/callwa-home.png" });
-const nightToggle = page.getByRole("button", { name: "Mostrar céu de noite" });
-if (await nightToggle.count()) await nightToggle.click();
+await page.getByRole("button", { name: "Mudar para céu de noite" }).click();
 await page.screenshot({ path: "/tmp/callwa-night.png" });
 
 await page.getByRole("button", { name: "Enviar uma luz para Leo" }).click();
@@ -29,9 +29,9 @@ await page.waitForTimeout(400);
 await page.screenshot({ path: "/tmp/callwa-sheet.png" });
 
 await page.getByRole("button", { name: /Bom dia/ }).click();
-await page.getByRole("button", { name: /Uma faísca está esperando/ }).waitFor();
-await page.getByRole("button", { name: /Uma faísca está esperando/ }).click();
-await page.getByText("13 trocas de luz").waitFor();
+await page.getByRole("button", { name: /Uma faísca está viajando/ }).waitFor();
+await page.getByRole("button", { name: /Uma faísca está viajando/ }).click();
+await page.getByText("1 estrela guarda um pedaço da história de vocês.").waitFor();
 await page.screenshot({ path: "/tmp/callwa-exchange.png" });
 
 if (errors.length) {

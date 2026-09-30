@@ -1,22 +1,19 @@
-# Design QA — CallWa Ato 1
+# Design QA — CallWa, céu imersivo
 
-Reference: interface CallWa supplied in chat, adapted into the shared-world progression concept.
+Referência: céu azul em tela cheia fornecido pelo usuário em 30 de setembro de 2026.
 
-Viewport checked: 390 × 844 px. Captures: `/tmp/callwa-home.png`, `/tmp/callwa-night.png`, `/tmp/callwa-sheet.png`, `/tmp/callwa-exchange.png`.
+Viewport verificado: 390 × 844 px.
 
-## Result
+## Resultado
 
-- Visual identity: passed. The wine, pink and dark palette remains recognizable.
-- Product hierarchy: passed. Shared sky and physical lamps lead; ritual and navigation are secondary.
-- Responsive mobile layout: passed at 390 × 844 px.
-- Primary journey: passed. Open message sheet → choose message → create spark → simulate remote response → create exchange/star.
-- Day/night scene: passed.
-- Keyboard/accessibility basics: passed. Visible focus, reduced-motion support, dialog labeling, Escape close, live announcements and navigation state are present.
-- Browser console and resources: passed with no failed resources in the smoke run.
+- A cena do mundo ocupa toda a área útil do dispositivo, sem card em volta do céu.
+- A cena diurna usa um céu azul claro e a cena noturna mantém o tom vinho do CallWa.
+- Não há luminárias nem estrelas na abertura.
+- A troca simulada cria uma única estrela em posição aleatória, mantida no estado da sessão.
+- O botão Dia/Noite alterna as cenas e torna as estrelas visíveis apenas à noite.
+- O fluxo de mensagem continua funcional: abrir mensagens, enviar, criar faísca, simular resposta e criar estrela.
+- Navegação, foco visível, anúncio de estado e redução de movimento foram preservados.
 
-## Follow-up polish
-
-- The custom-message composer remains a staged control until backend and content moderation rules are defined.
-- Real MQTT delivery, pair presence and persisted progression remain simulated by design in this frontend prototype.
+Capturas: `/tmp/callwa-home.png`, `/tmp/callwa-night.png` e `/tmp/callwa-exchange.png`.
 
 final result: passed
