@@ -54,4 +54,4 @@ Enviar este repositório ao GitHub disponibiliza o código; para acessar o site 
 
 ## Prévia no GitHub Pages
 
-Cada push para `main` também publica uma prévia estática no GitHub Pages. Quando a primeira execução terminar, ela estará em `https://callebecruz.github.io/CallWa_Recompensa/`.
+Cada push para `main` também publica uma prévia estática no GitHub Pages. O workflow habilita o serviço no primeiro deploy e a página fica em `https://callebecruz.github.io/CallWa_Recompensa/`.
