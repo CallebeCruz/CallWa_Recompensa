@@ -37,8 +37,8 @@ button:focus-visible { outline: 3px solid rgba(255, 134, 184, .72); outline-offs
 .time-toggle { width: 38px; height: 38px; color: #ffd58d; }
 
 .world-card { position: relative; min-height: 640px; border: 1px solid rgba(255, 178, 210, .32); border-radius: 30px; padding: 28px 24px 22px; background: #1b1322; overflow: hidden; box-shadow: 0 24px 60px rgba(0, 0, 0, .32); }
-.sky-art { position: absolute; inset: 0; background: url('/sky-night.png') center/cover no-repeat; opacity: .78; }
-.day .sky-art { background-image: url('/sky-day.png'); opacity: .82; }
+.sky-art { position: absolute; inset: 0; background: var(--sky-night) center/cover no-repeat; opacity: .78; }
+.day .sky-art { background-image: var(--sky-day); opacity: .82; }
 .world-card::after { content: ""; position: absolute; inset: 0; background: rgba(20, 9, 22, .18); pointer-events: none; }
 .world-copy { position: relative; z-index: 3; max-width: 310px; }
 .eyebrow { display: block; color: var(--pink-soft); font-size: 11px; font-weight: 800; letter-spacing: 1.4px; margin-bottom: 8px; }

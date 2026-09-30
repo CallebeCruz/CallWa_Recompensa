@@ -19,7 +19,7 @@ import {
   X,
 } from "@phosphor-icons/react";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 
 type QuickMessage = { label: string; detail: string; icon: "sun" | "moon" | "heart" | "spark" };
 
@@ -45,6 +45,7 @@ function MessageIcon({ kind }: { kind: QuickMessage["icon"] }) {
 }
 
 export default function HomePage() {
+  const assetPath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   const [sheetOpen, setSheetOpen] = useState(false);
   const [pending, setPending] = useState<string | null>(null);
   const [exchanges, setExchanges] = useState(12);
@@ -89,7 +90,13 @@ export default function HomePage() {
   }
 
   return (
-    <main className={isNight ? "app-shell night" : "app-shell day"}>
+    <main
+      className={isNight ? "app-shell night" : "app-shell day"}
+      style={{
+        "--sky-night": `url("${assetPath}/sky-night.png")`,
+        "--sky-day": `url("${assetPath}/sky-day.png")`,
+      } as CSSProperties}
+    >
       <header className="topbar">
         <button className="avatar" aria-label="Abrir perfil" onClick={() => setToast("O perfil completo chega na próxima etapa do protótipo")}><UserCircle size={26} weight="duotone" /></button>
         <div className="brand"><Heart size={18} weight="fill" /><span>CallWa</span></div>
@@ -141,7 +148,7 @@ export default function HomePage() {
             <div className="anchor anchor-leo"><Star size={15} weight="fill" /><span>Leo</span></div>
 
             <div className={`lamp-preview ${newStar ? "celebrating" : ""}`}>
-              <Image src="/callwa-pair.png" width={1774} height={887} alt="As luminárias de Ana e Leo acesas em rosa e azul" priority />
+              <Image src={`${assetPath}/callwa-pair.png`} width={1774} height={887} alt="As luminárias de Ana e Leo acesas em rosa e azul" priority />
               <span><LampPendant size={13} weight="fill" /> mundo e luminárias em sintonia</span>
             </div>
 
