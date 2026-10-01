@@ -49,6 +49,7 @@ export default function HomePage() {
   const [newStarId, setNewStarId] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [isNight, setIsNight] = useState(false);
+  const [moonBrightness, setMoonBrightness] = useState(78);
 
   useEffect(() => {
     if (!toast) return;
@@ -76,14 +77,29 @@ export default function HomePage() {
     window.setTimeout(() => setNewStarId(null), 2600);
   }
 
+  function brightenMoon() {
+    setMoonBrightness((current) => current >= 100 ? 55 : current + 15);
+  }
+
   return (
     <main
       className={isNight ? "world-screen night" : "world-screen day"}
-      style={{ "--sky-night": `url("${assetPath}/sky-night-moon.png")`, "--sky-day": `url("${assetPath}/sky-day-clear.png")`, "--cloud-drift": `url("${assetPath}/cloud-drift.png")` } as CSSProperties}
+      style={{ "--sky-night": `url("${assetPath}/sky-night-clear.png")`, "--sky-day": `url("${assetPath}/sky-day-clear.png")`, "--cloud-drift": `url("${assetPath}/cloud-drift.png")` } as CSSProperties}
     >
       <div className="sky-background" aria-hidden="true" />
       <div className="sky-scrim" aria-hidden="true" />
       <div className="cloud-drift" aria-hidden="true"><i /><i /></div>
+      {isNight && (
+        <button
+          className="moon-element"
+          onClick={brightenMoon}
+          aria-label={`Ajustar brilho da Lua, ${moonBrightness}%`}
+          title="Toque para alterar o brilho"
+          style={{ "--moon-brightness": moonBrightness / 100 } as CSSProperties}
+        >
+          <Image src={`${assetPath}/moon-crescent.png`} alt="" width={240} height={240} priority />
+        </button>
+      )}
 
       <header className="topbar">
         <button className="chrome-button" aria-label="Abrir perfil" onClick={() => setToast("O perfil completo chega na próxima etapa do protótipo")}><UserCircle size={24} weight="duotone" /></button>

@@ -21,6 +21,7 @@ await page.goto(process.env.CALLWA_PREVIEW_URL ?? "http://127.0.0.1:4173", { wai
 await page.getByRole("button", { name: "Mudar para céu de noite" }).waitFor();
 await page.screenshot({ path: "/tmp/callwa-home.png" });
 await page.getByRole("button", { name: "Mudar para céu de noite" }).click();
+await page.getByRole("button", { name: /Ajustar brilho da Lua/ }).click();
 await page.screenshot({ path: "/tmp/callwa-night.png" });
 
 await page.getByRole("button", { name: "Enviar uma luz para Leo" }).click();
