@@ -50,6 +50,7 @@ export default function HomePage() {
   const [toast, setToast] = useState<string | null>(null);
   const [isNight, setIsNight] = useState(false);
   const [moonBrightness, setMoonBrightness] = useState(78);
+  const [sunBrightness, setSunBrightness] = useState(78);
 
   useEffect(() => {
     if (!toast) return;
@@ -81,14 +82,29 @@ export default function HomePage() {
     setMoonBrightness((current) => current >= 100 ? 55 : current + 15);
   }
 
+  function brightenSun() {
+    setSunBrightness((current) => current >= 100 ? 55 : current + 15);
+  }
+
   return (
     <main
       className={isNight ? "world-screen night" : "world-screen day"}
-      style={{ "--sky-night": `url("${assetPath}/sky-night-clear.png")`, "--sky-day": `url("${assetPath}/sky-day-clear.png")`, "--cloud-drift": `url("${assetPath}/cloud-drift.png")` } as CSSProperties}
+      style={{ "--sky-night": `url("${assetPath}/sky-night-clear.png")`, "--sky-day": `url("${assetPath}/sky-day-clear-v2.png")`, "--cloud-drift": `url("${assetPath}/cloud-drift.png")` } as CSSProperties}
     >
       <div className="sky-background" aria-hidden="true" />
       <div className="sky-scrim" aria-hidden="true" />
       <div className="cloud-drift" aria-hidden="true"><i /><i /></div>
+      {!isNight && (
+        <button
+          className="sun-element"
+          onClick={brightenSun}
+          aria-label={`Ajustar brilho do Sol, ${sunBrightness}%`}
+          title="Toque para alterar o brilho"
+          style={{ "--sun-brightness": sunBrightness / 100 } as CSSProperties}
+        >
+          <Image src={`${assetPath}/sun-disc.png`} alt="" width={220} height={220} priority />
+        </button>
+      )}
       {isNight && (
         <button
           className="moon-element"
