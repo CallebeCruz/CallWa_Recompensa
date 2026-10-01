@@ -17,6 +17,7 @@ Viewport verificado: 390 × 844 px.
 - Duas camadas translúcidas de nuvens fotográficas atravessam o céu lentamente; no modo noturno, elas ficam quase imperceptíveis.
 - O céu recebe deriva de câmera e respiração de luz discretas; Sol e Lua flutuam e uma estrela cadente aparece ocasionalmente à noite.
 - O controle de progresso navega pelos quatro atos sem mudar de tela: Céu, Terra/semente, Jardim e Vagalumes.
+- No protótipo, trocas completas também liberam o próximo ato automaticamente aos 3, 6 e 10 retornos; esses limiares são demonstrativos até a configuração de balanceamento do backend entrar.
 - A mudança de ato usa uma transição breve de câmera/luz. A Terra mantém o céu como fundo, a árvore nasce sem raízes expostas e os vagalumes ficam acima do jardim.
 - O fluxo de mensagem continua funcional: abrir mensagens, enviar, criar faísca, simular resposta e criar estrela.
 - Navegação, foco visível, anúncio de estado e redução de movimento foram preservados.
