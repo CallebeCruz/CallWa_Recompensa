@@ -8,8 +8,8 @@ Viewport verificado: 390 × 844 px.
 
 - A cena do mundo ocupa toda a área útil do dispositivo, sem card em volta do céu.
 - A cena diurna usa um céu azul claro e limpo, com nuvens baixas; à noite, a cena fica azul-marinho quase preta, também com nuvens baixas.
-- O Sol não faz parte do fundo: é um elemento independente, flutua de leve e pode ter o brilho alterado ao toque.
-- A Lua não faz parte do fundo: é um elemento independente, flutua de leve e pode ter o brilho alterado ao toque.
+- O Sol não faz parte do fundo: é um elemento independente, menor e suave, flutua de leve e pode ter o brilho alterado ao toque.
+- A Lua não faz parte do fundo: é um elemento independente em escala discreta, flutua de leve e pode ter o brilho alterado ao toque.
 - Não há luminárias nem estrelas na abertura.
 - A troca simulada cria uma única estrela de luz branca com brilho óptico, em posição aleatória e mantida no estado da sessão.
 - O botão Dia/Noite alterna as cenas e torna as estrelas visíveis apenas à noite.

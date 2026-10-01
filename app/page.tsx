@@ -125,7 +125,7 @@ export default function HomePage() {
           title="Toque para alterar o brilho"
           style={{ "--sun-brightness": sunBrightness / 100 } as CSSProperties}
         >
-          <Image src={`${assetPath}/sun-disc.png`} alt="" width={220} height={220} priority />
+          <Image src={`${assetPath}/sun-soft.png`} alt="" width={200} height={200} priority />
         </button>
       )}
       {isNight && (
