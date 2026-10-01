@@ -21,6 +21,18 @@ await page.goto(process.env.CALLWA_PREVIEW_URL ?? "http://127.0.0.1:4173", { wai
 await page.getByRole("button", { name: "Mudar para céu de noite" }).waitFor();
 await page.getByRole("button", { name: /Ajustar brilho do Sol/ }).click();
 await page.screenshot({ path: "/tmp/callwa-home.png" });
+await page.getByRole("button", { name: "Ver ato 2: Terra" }).click();
+await page.locator(".earth-seed").waitFor();
+await page.waitForTimeout(1050);
+await page.screenshot({ path: "/tmp/callwa-earth.png" });
+await page.getByRole("button", { name: "Ver ato 3: Jardim" }).click();
+await page.locator(".shared-tree").waitFor();
+await page.waitForTimeout(1250);
+await page.screenshot({ path: "/tmp/callwa-tree.png" });
+await page.getByRole("button", { name: "Ver ato 4: Vagalumes" }).click();
+await page.locator(".firefly-swarm").waitFor();
+await page.waitForTimeout(800);
+await page.screenshot({ path: "/tmp/callwa-fireflies.png" });
 await page.getByRole("button", { name: "Mudar para céu de noite" }).click();
 await page.getByRole("button", { name: /Ajustar brilho da Lua/ }).click();
 await page.locator(".shooting-star").waitFor({ timeout: 5000 });

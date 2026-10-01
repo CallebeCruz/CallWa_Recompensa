@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import {
+  CaretLeft,
   BellSimple,
   CaretRight,
   GearSix,
@@ -20,6 +21,14 @@ import { useEffect, useState, type CSSProperties } from "react";
 type QuickMessage = { label: string; detail: string; icon: "sun" | "moon" | "heart" | "spark" };
 type SkyStar = { id: string; left: number; top: number };
 type ShootingStar = { id: string; top: number; right: number; length: number };
+type WorldAct = 1 | 2 | 3 | 4;
+
+const WORLD_ACTS: Array<{ id: WorldAct; title: string }> = [
+  { id: 1, title: "Céu" },
+  { id: 2, title: "Terra" },
+  { id: 3, title: "Jardim" },
+  { id: 4, title: "Vagalumes" },
+];
 
 const QUICK_MESSAGES: QuickMessage[] = [
   { label: "Bom dia", detail: "Um começo iluminado", icon: "sun" },
@@ -53,6 +62,8 @@ export default function HomePage() {
   const [moonBrightness, setMoonBrightness] = useState(78);
   const [sunBrightness, setSunBrightness] = useState(78);
   const [shootingStar, setShootingStar] = useState<ShootingStar | null>(null);
+  const [worldAct, setWorldAct] = useState<WorldAct>(1);
+  const [isChangingAct, setIsChangingAct] = useState(false);
 
   useEffect(() => {
     if (!toast) return;
@@ -109,9 +120,20 @@ export default function HomePage() {
     setSunBrightness((current) => current >= 100 ? 55 : current + 15);
   }
 
+  function goToAct(nextAct: WorldAct) {
+    if (nextAct === worldAct || isChangingAct) return;
+    setIsChangingAct(true);
+    window.setTimeout(() => {
+      setWorldAct(nextAct);
+      window.setTimeout(() => setIsChangingAct(false), 540);
+    }, 320);
+  }
+
+  const activeAct = WORLD_ACTS[worldAct - 1];
+
   return (
     <main
-      className={isNight ? "world-screen night" : "world-screen day"}
+      className={`world-screen ${isNight ? "night" : "day"} act-${worldAct}`}
       style={{ "--sky-night": `url("${assetPath}/sky-night-clear.png")`, "--sky-day": `url("${assetPath}/sky-day-clear-v2.png")`, "--cloud-drift": `url("${assetPath}/cloud-drift.png")` } as CSSProperties}
     >
       <div className="sky-background" aria-hidden="true" />
@@ -141,6 +163,13 @@ export default function HomePage() {
       )}
       {shootingStar && <span key={shootingStar.id} className="shooting-star" aria-label="Estrela cadente" style={{ "--shooting-star-top": `${shootingStar.top}%`, "--shooting-star-right": `${shootingStar.right}%`, "--shooting-star-length": `${shootingStar.length}px` } as CSSProperties} />}
 
+      <div className={`world-stage stage-${worldAct} ${isChangingAct ? "is-changing" : ""}`} aria-label={`Ato ${worldAct}: ${activeAct.title}`}>
+        {worldAct >= 2 && <Image className="earth-seed" src={`${assetPath}/earth-seed.png`} alt="" width={900} height={700} priority />}
+        {worldAct >= 3 && <Image className="shared-tree" src={`${assetPath}/shared-tree.png`} alt="" width={850} height={1040} priority />}
+        {worldAct === 4 && <Image className="firefly-swarm" src={`${assetPath}/fireflies.png`} alt="" width={900} height={700} priority />}
+      </div>
+      {isChangingAct && <div className="act-transition" aria-hidden="true" />}
+
       <header className="topbar">
         <button className="chrome-button" aria-label="Abrir perfil" onClick={() => setToast("O perfil completo chega na próxima etapa do protótipo")}><UserCircle size={24} weight="duotone" /></button>
         <div className="brand"><Heart size={17} weight="fill" /><span>CallWa</span></div>
@@ -164,6 +193,18 @@ export default function HomePage() {
       </div>
 
       {pending && <button className="pending-spark" onClick={simulateReply}><Sparkle size={24} weight="fill" /><span><strong>Uma faísca está viajando</strong><small>Leo recebeu “{pending}”</small><em>DEMONSTRAÇÃO · simular resposta</em></span><CaretRight size={18} /></button>}
+
+      <section className="progress-dock" aria-label="Progresso do mundo compartilhado">
+        <button className="act-step" aria-label="Ver ato anterior" disabled={worldAct === 1} onClick={() => goToAct((worldAct - 1) as WorldAct)}><CaretLeft size={20} /></button>
+        <div className="act-status">
+          <span>Mundo compartilhado</span>
+          <strong>{activeAct.title}</strong>
+          <div className="act-dots" aria-label={`Ato ${worldAct} de 4`}>
+            {WORLD_ACTS.map((act) => <button key={act.id} className={act.id === worldAct ? "active" : ""} onClick={() => goToAct(act.id)} aria-label={`Ver ato ${act.id}: ${act.title}`} aria-current={act.id === worldAct ? "step" : undefined} />)}
+          </div>
+        </div>
+        <button className="act-step" aria-label="Ver próximo ato" disabled={worldAct === 4} onClick={() => goToAct((worldAct + 1) as WorldAct)}><CaretRight size={20} /></button>
+      </section>
 
       <button className="send-primary" onClick={() => pending ? setToast("A faísca está aguardando Leo com calma") : setSheetOpen(true)}><PaperPlaneTilt size={22} weight="fill" /> {pending ? "Faísca enviada · aguardando Leo" : "Enviar uma luz para Leo"}</button>
 

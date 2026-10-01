@@ -16,9 +16,11 @@ Viewport verificado: 390 × 844 px.
 - A área central não contém título, ato, explicações ou cartões: permanece reservada ao céu.
 - Duas camadas translúcidas de nuvens fotográficas atravessam o céu lentamente; no modo noturno, elas ficam quase imperceptíveis.
 - O céu recebe deriva de câmera e respiração de luz discretas; Sol e Lua flutuam e uma estrela cadente aparece ocasionalmente à noite.
+- O controle de progresso navega pelos quatro atos sem mudar de tela: Céu, Terra/semente, Jardim e Vagalumes.
+- A mudança de ato usa uma transição breve de câmera/luz. A Terra mantém o céu como fundo, a árvore nasce sem raízes expostas e os vagalumes ficam acima do jardim.
 - O fluxo de mensagem continua funcional: abrir mensagens, enviar, criar faísca, simular resposta e criar estrela.
 - Navegação, foco visível, anúncio de estado e redução de movimento foram preservados.
 
-Capturas: `/tmp/callwa-home.png`, `/tmp/callwa-night.png` e `/tmp/callwa-exchange.png`.
+Capturas: `/tmp/callwa-home.png`, `/tmp/callwa-earth.png`, `/tmp/callwa-tree.png`, `/tmp/callwa-fireflies.png`, `/tmp/callwa-night.png` e `/tmp/callwa-exchange.png`.
 
 final result: passed
