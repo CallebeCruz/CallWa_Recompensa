@@ -15,6 +15,7 @@ Viewport verificado: 390 × 844 px.
 - O botão Dia/Noite alterna as cenas e torna as estrelas visíveis apenas à noite.
 - A área central não contém título, ato, explicações ou cartões: permanece reservada ao céu.
 - Duas camadas translúcidas de nuvens fotográficas atravessam o céu lentamente; no modo noturno, elas ficam quase imperceptíveis.
+- O céu recebe deriva de câmera e respiração de luz discretas; Sol e Lua flutuam e uma estrela cadente aparece ocasionalmente à noite.
 - O fluxo de mensagem continua funcional: abrir mensagens, enviar, criar faísca, simular resposta e criar estrela.
 - Navegação, foco visível, anúncio de estado e redução de movimento foram preservados.
 

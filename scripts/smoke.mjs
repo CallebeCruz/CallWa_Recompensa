@@ -23,6 +23,7 @@ await page.getByRole("button", { name: /Ajustar brilho do Sol/ }).click();
 await page.screenshot({ path: "/tmp/callwa-home.png" });
 await page.getByRole("button", { name: "Mudar para céu de noite" }).click();
 await page.getByRole("button", { name: /Ajustar brilho da Lua/ }).click();
+await page.locator(".shooting-star").waitFor({ timeout: 5000 });
 await page.screenshot({ path: "/tmp/callwa-night.png" });
 
 await page.getByRole("button", { name: "Enviar uma luz para Leo" }).click();

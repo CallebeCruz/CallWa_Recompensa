@@ -19,6 +19,7 @@ import { useEffect, useState, type CSSProperties } from "react";
 
 type QuickMessage = { label: string; detail: string; icon: "sun" | "moon" | "heart" | "spark" };
 type SkyStar = { id: string; left: number; top: number };
+type ShootingStar = { id: string; top: number; right: number; length: number };
 
 const QUICK_MESSAGES: QuickMessage[] = [
   { label: "Bom dia", detail: "Um começo iluminado", icon: "sun" },
@@ -51,12 +52,34 @@ export default function HomePage() {
   const [isNight, setIsNight] = useState(false);
   const [moonBrightness, setMoonBrightness] = useState(78);
   const [sunBrightness, setSunBrightness] = useState(78);
+  const [shootingStar, setShootingStar] = useState<ShootingStar | null>(null);
 
   useEffect(() => {
     if (!toast) return;
     const timer = window.setTimeout(() => setToast(null), 3400);
     return () => window.clearTimeout(timer);
   }, [toast]);
+
+  useEffect(() => {
+    if (!isNight) {
+      setShootingStar(null);
+      return;
+    }
+
+    let launchTimer: number;
+    let clearTimer: number;
+    const launch = () => {
+      setShootingStar({ id: crypto.randomUUID(), top: 40 + Math.random() * 16, right: 4 + Math.random() * 23, length: 118 + Math.random() * 58 });
+      clearTimer = window.setTimeout(() => setShootingStar(null), 1550);
+      launchTimer = window.setTimeout(launch, 18000 + Math.random() * 15000);
+    };
+
+    launchTimer = window.setTimeout(launch, 1300);
+    return () => {
+      window.clearTimeout(launchTimer);
+      window.clearTimeout(clearTimer);
+    };
+  }, [isNight]);
 
   function sendMessage(message: QuickMessage) {
     if (pending) {
@@ -116,6 +139,7 @@ export default function HomePage() {
           <Image src={`${assetPath}/moon-crescent.png`} alt="" width={240} height={240} priority />
         </button>
       )}
+      {shootingStar && <span key={shootingStar.id} className="shooting-star" aria-label="Estrela cadente" style={{ "--shooting-star-top": `${shootingStar.top}%`, "--shooting-star-right": `${shootingStar.right}%`, "--shooting-star-length": `${shootingStar.length}px` } as CSSProperties} />}
 
       <header className="topbar">
         <button className="chrome-button" aria-label="Abrir perfil" onClick={() => setToast("O perfil completo chega na próxima etapa do protótipo")}><UserCircle size={24} weight="duotone" /></button>
