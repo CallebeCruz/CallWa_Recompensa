@@ -29,6 +29,7 @@ const WORLD_ACTS: Array<{ id: WorldAct; title: string }> = [
   { id: 3, title: "Jardim" },
   { id: 4, title: "Vagalumes" },
 ];
+const DEMO_ACT_THRESHOLDS: Record<WorldAct, number> = { 1: 0, 2: 3, 3: 6, 4: 10 };
 
 const QUICK_MESSAGES: QuickMessage[] = [
   { label: "Bom dia", detail: "Um começo iluminado", icon: "sun" },
@@ -105,10 +106,13 @@ export default function HomePage() {
 
   function simulateReply() {
     const star = randomStar();
+    const completedExchanges = stars.length + 1;
+    const unlockedAct = ([4, 3, 2, 1] as WorldAct[]).find((act) => completedExchanges >= DEMO_ACT_THRESHOLDS[act]) ?? 1;
     setPending(null);
     setStars((current) => [...current, star]);
     setNewStarId(star.id);
     setToast("A faísca encontrou resposta. Uma estrela nasceu no céu de vocês.");
+    if (unlockedAct > worldAct) goToAct(unlockedAct);
     window.setTimeout(() => setNewStarId(null), 2600);
   }
 
